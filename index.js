@@ -1,3 +1,5 @@
+"use strict"
+
 // let a = parseInt(prompt("Ingrese valor de a"))
 
 // if(a > 10){
@@ -197,4 +199,61 @@
 
 
 /*----------------------PRÁCTICA------------------------------------*/
+
+
+
+
+const cardsContainer = document.getElementById("cardsContainer")
+const btn = document.getElementById("btn")
+btn.addEventListener("click", getData)
+
+
+
+function getData() {
+        
+        fetch("https://www.breakingbadapi.com/api/characters")
+        .then(res => res.json())
+        .then(data => renderData(data))
+        .catch(err => console.log(err));
+}
+
+function renderData(characters){
+     characters.forEach(char => {
+        const card = document.createElement("div")
+        card.innerHTML = `<div>
+        <img src="${char.img}" alt="${char.name}" </img>
+        <h2>${char.name}</h2>
+        </div>`;
+        cardsContainer.appendChild(card)   
+
+     });
+
+       
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
