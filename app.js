@@ -198,38 +198,85 @@
 // personas.forEach(el => console.log(`${el.nombre} es amigo de ${el.amigos}`))
 
 
-/*----------------------PRÁCTICA------------------------------------*/
+/*----------------------BREAKING BAD------------------------------------*/
 
 
 
 
-const cardsContainer = document.getElementById("cardsContainer")
-const btn = document.getElementById("btn")
-btn.addEventListener("click", getData)
+// const cardsContainer = document.getElementById("cardsContainer")
+// const btn = document.getElementById("btn")
+// btn.addEventListener("click", getData)
 
 
 
-function getData() {
+// function getData() {
         
-        fetch("https://www.breakingbadapi.com/api/characters")
-        .then(res => res.json())
-        .then(data => renderData(data))
-        .catch(err => console.log(err));
-}
+//         fetch("https://www.breakingbadapi.com/api/characters")
+//         .then(res => res.json())
+//         .then(data => renderData(data))
+//         .catch(err => console.log(err));
+// }
 
-function renderData(characters){
-     characters.forEach(char => {
-        const card = document.createElement("div")
-        card.innerHTML = `<div>
-        <img src="${char.img}" alt="${char.name}" </img>
-        <h2>${char.name}</h2>
-        </div>`;
-        cardsContainer.appendChild(card)   
+// function renderData(characters){
+//      characters.forEach(char => {
+//         const card = document.createElement("div")
+//         card.innerHTML = `<div>
+//         <img src="${char.img}" alt="${char.name}" </img>
+//         <h2>${char.name}</h2>
+//         </div>`;
+//         cardsContainer.appendChild(card)   
 
-     });
+//      });
 
        
-}
+// }
+
+
+import express from "express"
+import hbs from "express-handlebars"
+import fetch from "node-fetch"
+import { engine } from 'express-handlebars';
+
+const PORT = 8000
+const app = express()
+const url = "https://www.breakingbadapi.com/api/characters"
+
+        
+app.engine('hbs', hbs.engine({ extname: "hbs"}));
+app.set('view engine', 'hbs');
+app.set('views', './views');
+
+// app.use(express.static("public"))
+
+app.get('/', (req, res) => {
+        res.render('home')
+        
+    });
+
+app.get('/characters', (req, res) => {
+        fetch(url)
+        .then(resp => resp.json())
+        .then(characters => res.render('characters', {characters}))
+        // res.render('characters')
+})
+        
+        
+    
+
+
+// app.get("/main", (req, res) => {
+//  res.render("main")
+// })
+
+
+
+
+
+
+app.listen(PORT, (err) => {
+err ? console.log(`Error: ${err}`)
+:
+console.log(`Server running on http://localhost:${PORT}`)})
 
 
 
