@@ -1,0 +1,20 @@
+{{>characters}}
+
+
+<a href="./partials/characters">Ocultar</a>
+
+<section class="container">
+{{#each characters}}
+<div class="cardContainer">
+ <img src={{img}} alt={{name}}>
+<h2>{{name}}</h2>
+
+
+
+</div>
+{{/each}}
+
+
+
+
+</section>

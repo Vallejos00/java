@@ -251,22 +251,25 @@ app.set('views', './views');
 app.get('/', (req, res) => {
         res.render('home')
         
-    });
+});
 
-app.get('/characters', (req, res) => {
+app.get('/infoChar', (req, res) => {
         fetch(url)
         .then(resp => resp.json())
-        .then(characters => res.render('characters', {characters}))
-        // res.render('characters')
+        .then(characters => res.render('infoChar', {characters}))
 })
+
+app.get('/partials/characters', (req, res) => {
+        res.render('partials/characters')
+        
+})
+
         
         
     
 
 
-// app.get("/main", (req, res) => {
-//  res.render("main")
-// })
+
 
 
 
