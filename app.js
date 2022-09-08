@@ -236,22 +236,27 @@ import express from "express"
 import hbs from "express-handlebars"
 import fetch from "node-fetch"
 import { engine } from 'express-handlebars';
+import form from './helpers/formController.js';
 
 const PORT = 8000
 const app = express()
 const url = "https://www.breakingbadapi.com/api/characters"
 
-        
+
 app.engine('hbs', hbs.engine({ extname: "hbs"}));
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
-// app.use(express.static("public"))
+app.use(express.static("public"))
 
 app.get('/', (req, res) => {
         res.render('home')
         
 });
+
+
+app.use('/', form)
+
 
 app.get('/infoChar', (req, res) => {
         fetch(url)
@@ -264,6 +269,8 @@ app.get('/partials/characters', (req, res) => {
         
 })
 
+
+app.get('/registrate', form)
         
         
     
