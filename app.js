@@ -237,6 +237,8 @@ import hbs from "express-handlebars"
 import fetch from "node-fetch"
 import { engine } from 'express-handlebars';
 import form from './helpers/formController.js';
+import * as dotenv from 'dotenv'
+dotenv.config();
 
 const PORT = 8000
 const app = express()

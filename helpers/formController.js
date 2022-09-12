@@ -1,7 +1,8 @@
-import express from "express"
+import express from 'express'
 const form = express.Router()
 form.use(express.urlencoded())
-import nodemailer from "nodemailer"
+import nodemailer from 'nodemailer'
+
 
 form.get('/registrate', (req, res) => {
     res.render('registrate')
@@ -9,7 +10,7 @@ form.get('/registrate', (req, res) => {
 
 
 
-form.post('/registrate', (req, res) => {
+form.post('/registrate', async (req, res) => {
     const { firstName, lastName } = req.body
     const mailMsg = {
         to: 'pepe@pepe.com',
@@ -22,12 +23,19 @@ form.post('/registrate', (req, res) => {
         host: "smtp.mailtrap.io",
         port: 2525,
         auth: {
-          user: "417bb401d569cc",
-          pass: "57b426990076ab"
+          user: process.env.user,
+          pass: process.env.pass
         }
       });
 
-      transport.sendMail(mailMsg)
+      const sendMailStatus = await transport.sendMail(mailMsg)
+      let sendMailFeedback = '';
+      if (sendMailStatus.rejected.length){
+        sendMailFeedback = 'No se pudieron enviar los datos'
+      } else{
+        sendMailFeedback = 'Datos enviados'
+      }
+      res.render('registrate', {message: sendMailFeedback})
 
 })
 
