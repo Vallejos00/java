@@ -236,7 +236,7 @@ import express from "express"
 import hbs from "express-handlebars"
 import fetch from "node-fetch"
 import { engine } from 'express-handlebars';
-import form from './helpers/formController.js';
+import router from './config/formController.js';
 
 const PORT = 8000
 const app = express()
@@ -255,7 +255,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use('/', form)
+app.use('/', router)
 
 
 app.get('/infoChar', (req, res) => {
@@ -270,7 +270,7 @@ app.get('/partials/characters', (req, res) => {
 })
 
 
-app.get('/registrate', form)
+app.get('/registrate', router)
         
         
     
