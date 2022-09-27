@@ -3,8 +3,8 @@ const router = express.Router()
 router.use(express.urlencoded())
 import validationRules from "./validator.js"
 import nodemailer from "nodemailer"
-import validator from "express-validator"
-const { body, validationResult } = validator 
+
+
 
 /*---------------------------------------------------------------------------*/
 
@@ -16,13 +16,7 @@ router.get('/registrate', (req, res) => {
 
 router.post('/registrate', validationRules, async (req, res) => {
 
-   const errors = validationResult(req)
-
-   if(!errors.isEmpty()){
-     const arrWarnings = errors.array();
-     res.render('registrate', {arrWarnings} )
-     console.log(errors);
-    } else{            
+            
      const { firstName, lastName, email } = req.body
      const mailMsg = {
      to: 'pepe@pepe.com',
@@ -49,7 +43,7 @@ router.post('/registrate', validationRules, async (req, res) => {
     }
     
       
-    })
+    )
     
     export default router
 
