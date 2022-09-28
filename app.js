@@ -1,4 +1,4 @@
-
+import mongo from "./config/mongo.js"
 import express from "express"
 import hbs from "express-handlebars"
 import fetch from "node-fetch"
@@ -13,8 +13,8 @@ const url = "https://www.breakingbadapi.com/api/characters"
 app.engine('hbs', hbs.engine({ extname: "hbs"}));
 app.set('view engine', 'hbs');
 app.set('views', './views');
-
 app.use(express.static("public"))
+
 
 app.get('/', (req, res) => {
         res.render('home')

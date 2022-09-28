@@ -13,6 +13,9 @@ const validationRules = [
     body('email', 'Debe ingresar un mail')
     .notEmpty().withMessage('Debe ingresar un mail').isEmail()
     .withMessage('Debe ingresar un mail válido'),
+    body('pasword')
+    .notEmpty().withMessage('Ingrese una contraseña')
+    .isLength({min: 5, max: 20}).withMessage('Su contraseña debe tener al menos 5 carácteres'),
     (req, res, next) => {
 
         const errors = validationResult(req)
